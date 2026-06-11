@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DPI Debug</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>Debug</h1>
+      <p>Packet, DNS, QUIC, and flow-level decisions from the latest analysis.</p>
+    </div>
+    <nav>
+      <a href="/">Dashboard</a>
+      <a href="/debug">Debug</a>
+    </nav>
+  </header>
+  <main class="shell">
+    <section class="panel">
+      <div id="debugStatus" class="status">Loading latest analysis</div>
+    </section>
+
+    <section class="panel">
+      <h2>Packet Pipeline</h2>
+      <input id="packetFilter" class="search" placeholder="Search packets, apps, hosts, reasons">
+      <table id="debugPackets">
+        <thead><tr><th>Packet</th><th>Protocol</th><th>Hostname</th><th>SNI</th><th>Application</th><th>Blocked</th><th>Reason</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section class="two-col">
+      <div class="panel">
+        <h2>DNS Inspector</h2>
+        <table id="dnsTable">
+          <thead><tr><th>Hostname</th><th>Type</th><th>Blocked</th><th>Reason</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="panel">
+        <h2>QUIC Inspector</h2>
+        <table id="quicTable">
+          <thead><tr><th>Packet</th><th>Hostname</th><th>Blocked</th><th>Flow ID</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Flow Inspector</h2>
+      <table id="flowTable">
+        <thead><tr><th>Flow</th><th>Client</th><th>Server</th><th>Application</th><th>Blocked</th><th>Packets</th><th>Reason</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </main>
+  <script src="{{ url_for('static', filename='debug.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DPI Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>Deep Packet Inspection Engine</h1>
+      <p>Upload a capture, run the C++ DPI engine, inspect the classification pipeline.</p>
+    </div>
+    <nav>
+      <a href="/">Dashboard</a>
+      <a href="/debug">Debug</a>
+    </nav>
+  </header>
+
+  <main class="shell">
+    <section class="panel">
+      <form id="analyzeForm" class="controls">
+        <label class="file-picker">
+          <span>Select PCAP</span>
+          <input type="file" name="pcap" accept=".pcap,.cap" required>
+        </label>
+        <fieldset>
+          <legend>Block</legend>
+          {% for app in block_apps %}
+          <label><input type="checkbox" name="block_apps" value="{{ app }}"> {{ app }}</label>
+          {% endfor %}
+        </fieldset>
+        <button type="submit">Analyze</button>
+      </form>
+      <div id="status" class="status">Ready</div>
+    </section>
+
+    <section id="results" class="hidden">
+      <div class="stats-grid" id="statsGrid"></div>
+
+      <div class="two-col">
+        <div class="panel">
+          <h2>Application Breakdown</h2>
+          <div id="appBars"></div>
+        </div>
+        <div class="panel charts">
+          <h2>Charts</h2>
+          <canvas id="barChart"></canvas>
+          <canvas id="pieChart"></canvas>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="panel">
+          <h2>Detected Domains</h2>
+          <input id="domainSearch" class="search" placeholder="Search domains">
+          <table id="domainsTable">
+            <thead><tr><th data-sort="hostname">Hostname</th><th data-sort="app">App</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="panel">
+          <h2>Packet Search</h2>
+          <input id="packetSearch" class="search" placeholder="youtube, github, discord">
+          <table id="packetTable">
+            <thead><tr><th>Packet</th><th>Host</th><th>App</th><th>Decision</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="panel">
+          <h2>Block Summary</h2>
+          <div id="blockSummary" class="summary"></div>
+          <div class="actions">
+            <a id="downloadPcap" class="button" href="#">Download output.pcap</a>
+            <a id="downloadJson" class="button secondary" href="#">Export analysis.json</a>
+          </div>
+        </div>
+        <div class="panel">
+          <h2>Live Log</h2>
+          <pre id="logWindow" class="log"></pre>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

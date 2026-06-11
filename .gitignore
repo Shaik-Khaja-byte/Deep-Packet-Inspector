@@ -1,0 +1,90 @@
+# Build output
+build/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+.ninja_deps
+.ninja_log
+build.ninja
+debug/
+release/
+bin/
+dist/
+
+# Old/legacy code (not part of current architecture)
+legacy/
+
+# Native binaries
+*.exe
+dpi_engine
+dpi_engine.exe
+
+# IDE/editor state
+.vs/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Python cache and Flask runtime data
+__pycache__/
+**/__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+.venv/
+venv/
+env/
+ENV/
+*.egg-info/
+instance/
+
+# Packaging and coverage outputs
+htmlcov/
+pip-wheel-metadata/
+
+# Compiler/linker artifacts
+*.obj
+*.o
+*.pdb
+*.ilk
+*.exp
+*.lib
+*.a
+*.so
+*.dll
+*.pyd
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+*.seed
+*.pid
+*.pid.lock
+
+# Local environment files
+.env
+.env.*
+*.local
+
+# Generated captures and local/private traffic
+*.pcap
+*.pcapng
+!samples/sample_capture.pcap
+output*.pcap
+output*.pcapng
+filtered*.pcap
+filtered*.pcapng
+capture*
+my_capture*
+traffic*
+blocked_output.pcap
+sample_output.pcap
